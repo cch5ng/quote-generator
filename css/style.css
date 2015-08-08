@@ -1,5 +1,7 @@
 body {
   background-image: url('http://cch5ng.github.io/quote-generator/media/nicolas_raymond_winter_daisy.jpg');
+  color: #000;
+  font-family: 'Laila', serif;
 }
 
 .container {
@@ -7,7 +9,11 @@ body {
 
 .btn {
 	background-color: #0b75b4;
-	/*color: #ccc;*/
+	font-size: 1.25em;
+}
+
+.quote {
+	font-size: 1.4em;
 }
 
 @media only screen and (min-width: 768px) {
