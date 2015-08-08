@@ -5,6 +5,11 @@ body {
 .container {
 }
 
+.btn {
+	background-color: #0b75b4;
+	/*color: #ccc;*/
+}
+
 @media only screen and (min-width: 768px) {
 
 }
