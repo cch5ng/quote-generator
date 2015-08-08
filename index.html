@@ -14,15 +14,21 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	<script src="js/markdown.min.js"></script>
 	<link href="css/style.css" rel="stylesheet" >
+	<script src="js/webcomponents-lite.min.js"></script>
+	<link rel="import" href="polymer/voice-player.html">
+
 </head>
 <body>
 
 	<div class="container">
 		<h2>Hans Christian Andersen Quote Generator</h2>
 
-		<div class="center">
-			<button name="btn" class="btn" id="quoteBtn">Quote Please</button>
+		<div class="buttons">
+			<button name="quoteBtn" class="btn" id="quoteBtn">Quote Please</button>
+			<button name="readBtn" class="btn" id="readBtn">Read It Please</button>
 		</div>
+
+		<voice-player id="voice-player"></voice-player>
 
 		<p class="quote">
 		</p>

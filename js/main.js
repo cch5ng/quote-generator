@@ -43,7 +43,7 @@ function getRandomIdx(length) {
 }
 
 //event handler
-function btnClickHandler(evt) {
+function quoteBtnClickHandler(evt) {
 	// var hitchcockUrl = 'https://en.wikiquote.org/w/api.php?format=json&action=query&titles=Alfred%20Hitchcock&prop=revisions&rvprop=content&callback=wikiCallback';
 	// var kubrickUrl = 'https://en.wikiquote.org/w/api.php?format=json&action=query&titles=Stanley%20Kubrick&prop=revisions&rvprop=content&callback=wikiCallback';
 	//var aesopUrl = 'https://en.wikiquote.org/w/api.php?format=json&action=query&titles=Aesop&prop=revisions&rvprop=content&callback=wikiCallback';
@@ -59,6 +59,9 @@ function btnClickHandler(evt) {
 	// 			'https://en.wikiquote.org/w/api.php?format=json&action=query&titles=Brothers%20Grimm&prop=revisions&rvprop=content&callback=wikiCallback'
 	// ];
 
+	var randomIdx,
+			quotesText = [];
+
 	$.ajax({
 		dataType: 'jsonp',
 		url: andersenUrl, //urlAr[getRandomIdx(urlAr.length)],
@@ -73,12 +76,11 @@ function btnClickHandler(evt) {
 
 			var quotes = doc.querySelectorAll('li > p'); //getElementsByTagName('li').$find('p');
 
-			var quotesText = [];
 			for (var i = 0; i < quotes.length; i++) {
 				var quoteObj = {};
 				var quoteText = quotes[i].innerHTML;
 				quoteText = quoteText.replace('**', '\n');
-				console.log(quoteText);
+				//console.log(quoteText);
 
 				//finding the index where the quote source begins
 				var re = /'{2}/g;
@@ -99,7 +101,7 @@ function btnClickHandler(evt) {
 				quotesText.push(quoteObj);
 			}
 
-			var randomIdx = getRandomIdx(quotesText.length);
+			randomIdx = getRandomIdx(quotesText.length);
 
 			$('.quote').text(quotesText[randomIdx].text);
 			$('.source').text(quotesText[randomIdx].source);
@@ -107,8 +109,21 @@ function btnClickHandler(evt) {
 		}
 	});
 
+	//read button click handler
+	function readBtnClickHandler() {
+		var curQuote = document.querySelector('.quote');
+		var curQuoteText = curQuote.innerText;
+		var voicePlayer = document.getElementById('voice-player');
+		voicePlayer.setAttribute('text', curQuoteText);
+		voicePlayer.speak();
+	}
+
+	//read button event listener
+	var readBtn = document.getElementById('readBtn');
+	readBtn.addEventListener('click', readBtnClickHandler);
+
 }
 
 //event listener
-var btn = document.getElementById('quoteBtn');
-btn.addEventListener('click', btnClickHandler);
+var quoteBtn = document.getElementById('quoteBtn');
+quoteBtn.addEventListener('click', quoteBtnClickHandler);
