@@ -63,51 +63,41 @@ function btnClickHandler(evt) {
 		dataType: 'jsonp',
 		url: andersenUrl, //urlAr[getRandomIdx(urlAr.length)],
 		success: function(data) {
-			//console.log('got data');
-			//console.log(data);
 			var content = data.query.pages['757']['revisions']['0']['*']; //andersen
-			//var content = data.query.pages['37737']['revisions']['0']['*']; //grimm
-			//var content = data.query.pages['79']['revisions']['0']['*']; //aesop
-			//var content = data.query.pages['3483']['revisions']['0']['*']; //hitchcock
-			//console.log(content);
-
 			var htmlData = markdown.toHTML(content);
-			console.log(htmlData);
 			//remove line breaks from HTML
 			var htmlDataNoBreaks = htmlData.replace(/\r|\n/g, '');
 
 			var parser = new DOMParser();
 			var doc = parser.parseFromString(htmlDataNoBreaks, 'text/html');
-			console.log(doc);
 
 			var quotes = doc.querySelectorAll('li > p'); //getElementsByTagName('li').$find('p');
-			console.log(quotes);
 
 			var quotesText = [];
 			for (var i = 0; i < quotes.length; i++) {
 				var quoteObj = {};
 				var quoteText = quotes[i].innerHTML;
 				quoteText = quoteText.replace('**', '\n');
+				console.log(quoteText);
 
-				var re = /\[{2}/g;
+				//finding the index where the quote source begins
+				var re = /'{2}/g;
 				var idxSource = quoteText.search(re);
-				idxSource -= 2;
-				//console.log('idxSource: ' + idxSource);
+				//idxSource -= 2;
 
+				//separating the source from the quote text
 				var source = quoteText.slice(idxSource);
+				//cleaning up formatting of source
 				source = source.replace("''[[w:", "");
 				source = source.replace("]]''", "");
 				var sourceAr = source.split('|');
 				source = sourceAr[0];
 				quoteObj.source = '~' + source + '~';
-				//console.log(quoteObj.source);
 
 				quoteObj.text = quoteText.slice(0, idxSource);
 
 				quotesText.push(quoteObj);
 			}
-
-			console.log(quotesText);
 
 			var randomIdx = getRandomIdx(quotesText.length);
 
