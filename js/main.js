@@ -89,14 +89,18 @@ function btnClickHandler(evt) {
 				var quoteText = quotes[i].innerHTML;
 				quoteText = quoteText.replace('**', '\n');
 
-				//var re = /"[[(\w\W)+]]"/i;
 				var re = /\[{2}/g;
 				var idxSource = quoteText.search(re);
 				idxSource -= 2;
-				console.log('idxSource: ' + idxSource);
-				quoteObj.source = quoteText.slice(idxSource);
-				console.log(quoteObj.source);
-				//quotesText.push(quotes[i].innerHTML);
+				//console.log('idxSource: ' + idxSource);
+
+				var source = quoteText.slice(idxSource);
+				source = source.replace("''[[w:", "");
+				source = source.replace("]]''", "");
+				var sourceAr = source.split('|');
+				source = sourceAr[0];
+				quoteObj.source = '~' + source + '~';
+				//console.log(quoteObj.source);
 
 				quoteObj.text = quoteText.slice(0, idxSource);
 
