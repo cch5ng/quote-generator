@@ -10,7 +10,7 @@ h2 {
 
 p {
 	font-size: 1.25em;
-	text-align: justify; /*center;*/
+	text-align: center;
 }
 
 .container {
@@ -34,6 +34,11 @@ p {
 
 .source {
 	text-align: center;
+	font-style: italic;
+}
+
+.hidden {
+	display: none;
 }
 
 @media only screen and (min-width: 768px) {
