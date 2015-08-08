@@ -106,21 +106,23 @@ function quoteBtnClickHandler(evt) {
 			$('.quote').text(quotesText[randomIdx].text);
 			$('.source').text(quotesText[randomIdx].source);
 
+			//read button click handler
+			function readBtnClickHandler() {
+				//var curQuote = document.querySelector('.quote');
+				var curQuoteText = quotesText[randomIdx].text;//curQuote.innerText;
+				console.log(curQuoteText);
+				var voicePlayer = document.getElementById('voice-player');
+				voicePlayer.setAttribute('text', curQuoteText);
+				voicePlayer.speak();
+			}
+
+			//read button event listener
+			var readBtn = document.getElementById('readBtn');
+			readBtn.addEventListener('click', readBtnClickHandler);
+
 		}
 	});
 
-	//read button click handler
-	function readBtnClickHandler() {
-		var curQuote = document.querySelector('.quote');
-		var curQuoteText = curQuote.innerText;
-		var voicePlayer = document.getElementById('voice-player');
-		voicePlayer.setAttribute('text', curQuoteText);
-		voicePlayer.speak();
-	}
-
-	//read button event listener
-	var readBtn = document.getElementById('readBtn');
-	readBtn.addEventListener('click', readBtnClickHandler);
 
 }
 
