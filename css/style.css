@@ -10,13 +10,13 @@ h2 {
 
 p {
 	font-size: 1.25em;
-	text-align: center;
+	text-align: justify; /*center;*/
 }
 
 .container {
 }
 
-.center {
+.buttons {
 	margin: 0 auto;
 }
 
@@ -24,12 +24,16 @@ p {
 	background-color: #0b75b4;
 	font-size: 1.25em;
 	display: block;
-	margin: 0 auto;
+	margin: 10px auto;
 }
 
 .quote {
 	margin-top: 20px;
 	font-size: 1.4em;
+}
+
+.source {
+	text-align: center;
 }
 
 @media only screen and (min-width: 768px) {
