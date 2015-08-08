@@ -73,6 +73,7 @@ function btnClickHandler(evt) {
 
 			var htmlData = markdown.toHTML(content);
 			console.log(htmlData);
+			//remove line breaks from HTML
 			var htmlDataNoBreaks = htmlData.replace(/\r|\n/g, '');
 
 			var parser = new DOMParser();
@@ -84,12 +85,31 @@ function btnClickHandler(evt) {
 
 			var quotesText = [];
 			for (var i = 0; i < quotes.length; i++) {
-				quotesText.push(quotes[i].innerHTML);
+				var quoteObj = {};
+				var quoteText = quotes[i].innerHTML;
+				quoteText = quoteText.replace('**', '\n');
+
+				//var re = /"[[(\w\W)+]]"/i;
+				var re = /\[{2}/g;
+				var idxSource = quoteText.search(re);
+				idxSource -= 2;
+				console.log('idxSource: ' + idxSource);
+				quoteObj.source = quoteText.slice(idxSource);
+				console.log(quoteObj.source);
+				//quotesText.push(quotes[i].innerHTML);
+
+				quoteObj.text = quoteText.slice(0, idxSource);
+
+				quotesText.push(quoteObj);
 			}
 
 			console.log(quotesText);
 
-			$('.quote').text(quotesText[getRandomIdx(quotesText.length)]);
+			var randomIdx = getRandomIdx(quotesText.length);
+
+			$('.quote').text(quotesText[randomIdx].text);
+			$('.source').text(quotesText[randomIdx].source);
+
 		}
 	});
 
