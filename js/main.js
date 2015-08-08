@@ -46,10 +46,10 @@ function getRandomIdx(length) {
 function quoteBtnClickHandler(evt) {
 	// var hitchcockUrl = 'https://en.wikiquote.org/w/api.php?format=json&action=query&titles=Alfred%20Hitchcock&prop=revisions&rvprop=content&callback=wikiCallback';
 	// var kubrickUrl = 'https://en.wikiquote.org/w/api.php?format=json&action=query&titles=Stanley%20Kubrick&prop=revisions&rvprop=content&callback=wikiCallback';
-	//var aesopUrl = 'https://en.wikiquote.org/w/api.php?format=json&action=query&titles=Aesop&prop=revisions&rvprop=content&callback=wikiCallback';
+	var aesopUrl = 'https://en.wikiquote.org/w/api.php?format=json&action=query&titles=Aesop&prop=revisions&rvprop=content&callback=wikiCallback';
 	// var okeefeUrl = 'https://en.wikiquote.org/w/api.php?format=json&action=query&titles=Georgia%20O%27Keeffe&prop=revisions&rvprop=content&callback=wikiCallback';
 	//var grimmUrl = 'https://en.wikiquote.org/w/api.php?format=json&action=query&titles=Brothers%20Grimm&prop=revisions&rvprop=content&callback=wikiCallback';
-	var andersenUrl = 'https://en.wikiquote.org/w/api.php?format=json&action=query&titles=Hans%20Christian%20Andersen&prop=revisions&rvprop=content&callback=wikiCallback';
+	//var andersenUrl = 'https://en.wikiquote.org/w/api.php?format=json&action=query&titles=Hans%20Christian%20Andersen&prop=revisions&rvprop=content&callback=wikiCallback';
 
 	// var urlAr = [
 	// 			'https://en.wikiquote.org/w/api.php?format=json&action=query&titles=Alfred%20Hitchcock&prop=revisions&rvprop=content&callback=wikiCallback',
@@ -62,12 +62,16 @@ function quoteBtnClickHandler(evt) {
 	var randomIdx,
 			quotesText = [];
 
+	//var readBtn = document.getElementById('readBtn');
+	$('#readBtn').removeClass('hidden');
+
 	$.ajax({
 		dataType: 'jsonp',
-		url: andersenUrl, //urlAr[getRandomIdx(urlAr.length)],
+		url: aesopUrl, //urlAr[getRandomIdx(urlAr.length)],
 		success: function(data) {
-			var content = data.query.pages['757']['revisions']['0']['*']; //andersen
+			var content = data.query.pages['79']['revisions']['0']['*']; //andersen
 			var htmlData = markdown.toHTML(content);
+			console.log('htmlData: ' + htmlData);
 			//remove line breaks from HTML
 			var htmlDataNoBreaks = htmlData.replace(/\r|\n/g, '');
 
@@ -76,7 +80,8 @@ function quoteBtnClickHandler(evt) {
 
 			var quotes = doc.querySelectorAll('li > p'); //getElementsByTagName('li').$find('p');
 
-			for (var i = 0; i < quotes.length; i++) {
+			//skipping the last quote because it has such quirky formatting
+			for (var i = 0; i < quotes.length - 1; i++) {
 				var quoteObj = {};
 				var quoteText = quotes[i].innerHTML;
 				quoteText = quoteText.replace('**', '\n');
@@ -89,11 +94,12 @@ function quoteBtnClickHandler(evt) {
 
 				//separating the source from the quote text
 				var source = quoteText.slice(idxSource);
+				console.log('uncleaned source: ' + source);
 				//cleaning up formatting of source
-				source = source.replace("''[[w:", "");
-				source = source.replace("]]''", "");
-				var sourceAr = source.split('|');
-				source = sourceAr[0];
+				source = source.replace(re, "");
+				source = source.replace(".", "");
+				// var sourceAr = source.split('|');
+				// source = sourceAr[0];
 				quoteObj.source = '~' + source + '~';
 
 				quoteObj.text = quoteText.slice(0, idxSource);
@@ -106,10 +112,16 @@ function quoteBtnClickHandler(evt) {
 			$('.quote').text(quotesText[randomIdx].text);
 			$('.source').text(quotesText[randomIdx].source);
 
+		}
+	});
+
+
+}
+
 			//read button click handler
 			function readBtnClickHandler() {
-				//var curQuote = document.querySelector('.quote');
-				var curQuoteText = quotesText[randomIdx].text;//curQuote.innerText;
+				var curQuote = document.querySelector('.quote');
+				var curQuoteText = curQuote.innerText; //quotesText[randomIdx].text;
 				console.log(curQuoteText);
 				var voicePlayer = document.getElementById('voice-player');
 				voicePlayer.setAttribute('text', curQuoteText);
@@ -120,11 +132,7 @@ function quoteBtnClickHandler(evt) {
 			var readBtn = document.getElementById('readBtn');
 			readBtn.addEventListener('click', readBtnClickHandler);
 
-		}
-	});
 
-
-}
 
 //event listener
 var quoteBtn = document.getElementById('quoteBtn');
