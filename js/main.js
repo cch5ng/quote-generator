@@ -71,7 +71,7 @@ function quoteBtnClickHandler(evt) {
 		success: function(data) {
 			var content = data.query.pages['79']['revisions']['0']['*']; //andersen
 			var htmlData = markdown.toHTML(content);
-			console.log('htmlData: ' + htmlData);
+			//console.log('htmlData: ' + htmlData);
 			//remove line breaks from HTML
 			var htmlDataNoBreaks = htmlData.replace(/\r|\n/g, '');
 
@@ -90,16 +90,13 @@ function quoteBtnClickHandler(evt) {
 				//finding the index where the quote source begins
 				var re = /'{2}/g;
 				var idxSource = quoteText.search(re);
-				//idxSource -= 2;
 
 				//separating the source from the quote text
 				var source = quoteText.slice(idxSource);
-				console.log('uncleaned source: ' + source);
+				//console.log('uncleaned source: ' + source);
 				//cleaning up formatting of source
 				source = source.replace(re, "");
 				source = source.replace(".", "");
-				// var sourceAr = source.split('|');
-				// source = sourceAr[0];
 				quoteObj.source = '~' + source + '~';
 
 				quoteObj.text = quoteText.slice(0, idxSource);
@@ -114,25 +111,7 @@ function quoteBtnClickHandler(evt) {
 
 		}
 	});
-
-
 }
-
-			//read button click handler
-			function readBtnClickHandler() {
-				var curQuote = document.querySelector('.quote');
-				var curQuoteText = curQuote.innerText; //quotesText[randomIdx].text;
-				console.log(curQuoteText);
-				var voicePlayer = document.getElementById('voice-player');
-				voicePlayer.setAttribute('text', curQuoteText);
-				voicePlayer.speak();
-			}
-
-			//read button event listener
-			var readBtn = document.getElementById('readBtn');
-			readBtn.addEventListener('click', readBtnClickHandler);
-
-
 
 //event listener
 var quoteBtn = document.getElementById('quoteBtn');
