@@ -1,9 +1,16 @@
 body {
-  background-image: url('http://cch5ng.github.io/quote-generator/media/nraymond_wdaisy640x640.jpg');
-  /* this should be as wide as 479px */
-  /* should there be separate image for portrait and landscape at each breakpoint? */
-  color: #000;
-  font-family: 'Laila', serif;
+	background-image: url('http://cch5ng.github.io/quote-generator/media/nraymond_wdaisy640x640.jpg');
+	/* should there be separate image for portrait and landscape at each breakpoint? */
+	color: #000;
+	font-family: 'Laila', serif;
+}
+
+header {
+	margin-top: 35px;
+}
+
+main {
+	margin-top: 25px;
 }
 
 h2 {
@@ -15,25 +22,35 @@ p {
 	text-align: center;
 }
 
+footer {
+	color: #042e48;
+	font-size: 0.85em;
+}
+
 .container {
+	height: 100%;
 }
 
 .buttons {
-	margin: 0 auto;
+	margin: 20px auto;
 }
 
-.btn {
+.button {
 	width: 100%;
 	background-color: #0b75b4;
 	font-size: 1.25em;
 	display: block;
 	margin: 10px auto;
-
+	/* overwriting bootstrap button style */
+	border-top: 0;
+	border-left: 0;
+	border-right: 0;
+	border-radius: 10px;
 	border-bottom: 3px solid #07517d;
 }
 
 .quote {
-	margin-top: 20px;
+	margin-top: 15px;
 	font-size: 1.4em;
 }
 
@@ -46,14 +63,22 @@ p {
 	display: none;
 }
 
+a:link, a:visited {
+	color: #042e48;
+	border: 0;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+}
+
 @media only screen and (min-width: 480px) {
 
-  body {
-    background-image: url('http://cch5ng.github.io/quote-generator/media/nraymond_wdaisy768x1024.jpg');
-    /* this should be as wide as 991px */
-  }
-	/* this background should be as wide as 767px */
-	.btn {
+	body {
+		background-image: url('http://cch5ng.github.io/quote-generator/media/nraymond_wdaisy768x1024.jpg');
+	}
+
+	.button {
 		width: 50%;
 	}
 }
@@ -61,28 +86,33 @@ p {
 
 @media only screen and (min-width: 768px) {
 
-  body {
-    background-image: url('http://cch5ng.github.io/quote-generator/media/nraymond_wdaisy1024x768.jpg');
-    /* this should be as wide as 991px */
-  }
+	body {
+		background-image: url('http://cch5ng.github.io/quote-generator/media/nraymond_wdaisy1024x768.jpg');
+	}
 
-	.btn {
+	header {
+		margin-top: 100px;
+	}
+
+	.buttons {
+		margin: 30px auto;
+	}
+
+	.button {
 		width: 33%;
 	}
 }
 
 @media only screen and (min-width: 992px) {
-  body {
-    background-image: url('http://cch5ng.github.io/quote-generator/media/nicolas_raymond_winter_daisy.jpg');
-    /* */
-  }
+	body {
+		background-image: url('http://cch5ng.github.io/quote-generator/media/nicolas_raymond_winter_daisy.jpg');
+	}
 
-	.btn {
+	.button {
 		width: 200px;
 	}
 }
 
 @media only screen and (min-width: 1200px) {
 	/* how to handle case where screen is wider than image width*/
-
 }
