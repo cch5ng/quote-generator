@@ -1,5 +1,5 @@
 body {
-  background-image: url('http://cch5ng.github.io/quote-generator/media/nicolas_raymond_winter_daisy.jpg');
+  background-image: url('http://cch5ng.github.io/quote-generator/media/nraymond_wdaisy_360x640.jpg');
   color: #000;
   font-family: 'Laila', serif;
 }
@@ -52,6 +52,11 @@ p {
 
 
 @media only screen and (min-width: 768px) {
+
+  body {
+    background-image: url('http://cch5ng.github.io/quote-generator/media/nraymond_wdaisy768x1024.jpg');
+  }
+
 	.btn {
 		width: 33%;
 	}
@@ -59,7 +64,7 @@ p {
 
 @media only screen and (min-width: 992px) {
   body {
-    background-image: url('http://cch5ng.github.io/quote-generator/media/nicolas_raymond_winter_daisy.jpg');
+    background-image: url('http://cch5ng.github.io/quote-generator/media/nraymond_wdaisy1024x768.jpg');
   }
 
 	.btn {
