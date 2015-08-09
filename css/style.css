@@ -58,13 +58,14 @@ p {
 }
 
 @media only screen and (min-width: 992px) {
+  body {
+    background-image: url('http://cch5ng.github.io/quote-generator/media/nicolas_raymond_winter_daisy.jpg');
+  }
+
 	.btn {
 		width: 200px;
 	}
 }
 
 @media only screen and (min-width: 1200px) {
-  body {
-    background-image: url('http://cch5ng.github.io/quote-generator/media/nicolas_raymond_winter_daisy.jpg');
-  }
 }
