@@ -1,5 +1,7 @@
 body {
   background-image: url('http://cch5ng.github.io/quote-generator/media/nraymond_wdaisy_360x640.jpg');
+  /* this should be as wide as 479px */
+  /* should there be separate image for portrait and landscape at each breakpoint? */
   color: #000;
   font-family: 'Laila', serif;
 }
@@ -45,6 +47,7 @@ p {
 }
 
 @media only screen and (min-width: 480px) {
+	/* this background should be as wide as 767px */
 	.btn {
 		width: 50%;
 	}
@@ -55,6 +58,7 @@ p {
 
   body {
     background-image: url('http://cch5ng.github.io/quote-generator/media/nraymond_wdaisy768x1024.jpg');
+    /* this should be as wide as 991px */
   }
 
 	.btn {
@@ -64,7 +68,8 @@ p {
 
 @media only screen and (min-width: 992px) {
   body {
-    background-image: url('http://cch5ng.github.io/quote-generator/media/nraymond_wdaisy1024x768.jpg');
+    background-image: url('http://cch5ng.github.io/quote-generator/media/nicolas_raymond_winter_daisy.jpg');
+    /* http://cch5ng.github.io/quote-generator/media/nraymond_wdaisy1024x768.jpg*/
   }
 
 	.btn {
@@ -73,4 +78,6 @@ p {
 }
 
 @media only screen and (min-width: 1200px) {
+	/* how to handle case where screen is wider than image width*/
+
 }
